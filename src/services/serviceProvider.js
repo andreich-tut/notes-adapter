@@ -8,7 +8,7 @@ import UserManager from './_userManager';
 class Provider {
 
     constructor() {
-        this._toolManager = new ToolManager(this);
+        this._toolManager = ToolManager;
         this._userManager = new UserManager(this);
         this._serverManager = new ServerManager(this);
     }
@@ -28,14 +28,12 @@ class Provider {
 
 export const ServiceProviderContext = React.createContext(null);
 
-export function ServiceProvider({ children }) {
-    return (
-        <ServiceProviderContext.Provider value={ new Provider() }>
-            { children }
-        </ServiceProviderContext.Provider>
-    );
-}
+export const ServiceProvider = ({ children }) => (
+    <ServiceProviderContext.Provider value={ new Provider() }>
+        { children }
+    </ServiceProviderContext.Provider>
+);
 
 ServiceProvider.propTypes = {
     children: PropTypes.element,
-}
+};

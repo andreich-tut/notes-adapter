@@ -1,5 +1,13 @@
 export default class UserManager {
 
+    constructor(ServiceManager) {
+        this._serviceManager = ServiceManager;
+        this._userCookieName = 'userData';
+        this._userData = null;
+
+        this.syncUserData();
+    }
+
     get isAuthenticated() {
         return this.idToken !== null;
     }
@@ -12,14 +20,6 @@ export default class UserManager {
         return this._userData ? this._userData.idToken : null;
     }
 
-    constructor(ServiceManager) {
-        this._serviceManager = ServiceManager;
-        this._userCookieName = 'userData';
-        this._userData = null;
-
-        this.syncUserData();
-    }
-
     getUserData() {
         const data = this._serviceManager.toolManager.getCookie(this._userCookieName);
 
@@ -30,7 +30,7 @@ export default class UserManager {
         this._serviceManager.toolManager.setCookie(
             this._userCookieName,
             JSON.stringify({ idToken, email }),
-            { expires: expiresIn }
+            { 'max-age': expiresIn }
         )
 
         this.syncUserData();

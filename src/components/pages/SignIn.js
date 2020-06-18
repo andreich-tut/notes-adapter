@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ServiceProviderContext } from '@/services/serviceProvider';
 import Button from '@/components/ui/Button';
 import InputPassword from '@/components/ui/InputPassword';
 import InputText from '@/components/ui/InputText';
+import useLoginFormInputs from '@/components/pages/useLoginInputs';
+import { useHistory } from 'react-router';
 
 
 const Form = styled.form`
@@ -20,46 +21,37 @@ const Form = styled.form`
 
 const SignIn = () => {
 
-    const [ email, setEmail ] = useState('');
-
-    const [ password, setPassword ] = useState('');
-
     const serviceProvider = useContext(ServiceProviderContext);
 
     const history = useHistory();
 
-    const handleEmailInputChange = (e) => setEmail(e.currentTarget.value);
-
-    const handlePasswordInputChange = (e) => setPassword(e.currentTarget.value);
-
-    const signIn = (e) => {
-        e.preventDefault();
-
+    const {
+        emailHandler,
+        passwordHandler,
+        submit,
+    } = useLoginFormInputs((email, password) => {
         serviceProvider.serverManager
             .signIn(email, password)
-            .then((success) => {
-                success ? history.push('/') : history.reload();
-            });
-    }
+            .then((success) => success ? history.push('/') : history.reload());
+    });
 
     return (
-        <Form>
+        <Form onSubmit={ submit }>
             <InputText
                 id="email"
                 placeholder="email"
-                handler={ handleEmailInputChange }
+                handler={ emailHandler }
             />
 
             <InputPassword
                 id="password"
                 placeholder="password"
-                handler={ handlePasswordInputChange }
+                handler={ passwordHandler }
             />
 
             <Button
                 text="Sign In"
                 type="submit"
-                handler={ signIn }
             />
         </Form>
     );

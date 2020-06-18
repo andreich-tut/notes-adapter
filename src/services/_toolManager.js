@@ -1,11 +1,8 @@
 export default class ToolManager {
-    constructor(ServiceManager) {
-        this._serviceManager = ServiceManager;
-    }
 
-    range(from, to, step = 1) {
-        let i = from;
+    static range(from, to, step = 1) {
         const range = [];
+        let i = from;
 
         while (i <= to) {
             range.push(i);
@@ -15,7 +12,7 @@ export default class ToolManager {
         return range;
     }
 
-    parseUnixDate(unixDate) {
+    static parseUnixDate(unixDate) {
         return new Date(unixDate * 1000).toLocaleString('ru', {
             year: 'numeric',
             month: 'numeric',
@@ -26,7 +23,7 @@ export default class ToolManager {
         });
     }
 
-    getCookie(name) {
+    static getCookie(name) {
         const matches = document.cookie.match(new RegExp(
             '(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'
         ));
@@ -34,7 +31,7 @@ export default class ToolManager {
         return matches ? decodeURIComponent(matches[1]) : undefined;
     }
 
-    setCookie(name, value, options = {}) {
+    static setCookie(name, value, options = {}) {
         options = {
             path: '/',
             ...options
@@ -57,7 +54,7 @@ export default class ToolManager {
         document.cookie = updatedCookie;
     }
 
-    deleteCookie(name) {
+    static deleteCookie(name) {
         this.setCookie(name, '', { 'max-age': -1 });
     }
 }

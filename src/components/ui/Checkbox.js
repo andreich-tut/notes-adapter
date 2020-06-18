@@ -39,14 +39,12 @@ const Checkbox = ({ title, handler }) => (
     <Label>
         <Input
             type="checkbox"
-            onClick={ () => handler() }
+            onClick={ () => handler && handler() }
             hidden
         />
 
         <Box>
-            <svg
-                width="12" height="10" viewBox="0 0 12 10" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+            <svg width="12" height="10" viewBox="0 0 12 10" fill="none">
                 <path
                     d="M11.5962 0.667206L3.59622 8.66721M0.596191 4.9601L3.59619 7.9601"
                     stroke="black"

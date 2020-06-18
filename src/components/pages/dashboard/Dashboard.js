@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { ServiceProviderContext } from '@/services/serviceProvider';
@@ -26,16 +26,17 @@ const Dashboard = () => {
 
     const history = useHistory();
 
-    const signOut = () => {
+    const signOut = useCallback(() => {
         if (confirm('Are you sure you want to sign out from App?')) {
             serverManager.signOut();
             history.push('/');
         }
-    };
+    }, []);
 
     useEffect(() => {
-        setUserName(userManager.email)
+        setUserName(userManager.email);
         setIsLoading(true);
+
         serverManager
             .fetchHistory()
             .then((messages) => {

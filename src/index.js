@@ -1,13 +1,13 @@
-import { createBrowserHistory } from 'history';
 import React from 'react';
 import { render } from 'react-dom';
 import { Router } from 'react-router-dom';
-import App from '@/components/core/App';
+import { createBrowserHistory } from 'history';
 import { ServiceProvider } from '@/services/serviceProvider';
+import App from '@/components/core/App';
 
 
 render(
-    <Router history={createBrowserHistory()}>
+    <Router history={ createBrowserHistory() }>
         <ServiceProvider>
             <App/>
         </ServiceProvider>

@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import JetBrainsMonoRegular from '@/assets/fonts/JetBrainsMono-Regular.woff2'
 
 
 const fontFamily = '\'JetBrains Mono\', monospace';
@@ -6,7 +7,7 @@ const fontFamily = '\'JetBrains Mono\', monospace';
 export default createGlobalStyle`
     @font-face {
         font-family: 'JetBrains Mono';
-        src: url('/fonts/JetBrainsMono-Bold.woff2');    
+        src: url(${ JetBrainsMonoRegular }) format('woff2');
     }
 
     html, body, div, span, applet, object, iframe,

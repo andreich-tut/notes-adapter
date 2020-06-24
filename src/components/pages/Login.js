@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import DelimiterLine from '../ui/DelimiterLine';
+import Delimiter from '../ui/Delimiter';
 import Link from '../ui/Link';
 import { Redirect } from 'react-router';
 
@@ -15,7 +15,7 @@ const Login = ({ isAuthenticated }) => isAuthenticated
     : (
         <Container>
             <Link to="/sign-up" text="Sign up"/>
-            <DelimiterLine/>
+            <Delimiter char="/"/>
             <Link to="/sign-in" text="Sign in"/>
         </Container>
     );

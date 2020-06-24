@@ -13,17 +13,10 @@ const Container = styled.section`
 `;
 
 const Dashboard = () => {
-
     const { serverManager, userManager } = useContext(ServiceProviderContext);
-
     const [ userName, setUserName ] = useState(null);
-
     const [ messages, setMessages ] = useState([]);
-
-    const [ totalMessagesCount, setTotalMessagesCount ] = useState(0);
-
     const [ isLoading, setIsLoading ] = useState(false);
-
     const history = useHistory();
 
     const signOut = useCallback(() => {
@@ -31,7 +24,7 @@ const Dashboard = () => {
             serverManager.signOut();
             history.push('/');
         }
-    }, []);
+    }, [ history, serverManager ]);
 
     useEffect(() => {
         setUserName(userManager.email);
@@ -40,10 +33,11 @@ const Dashboard = () => {
         serverManager
             .fetchHistory()
             .then((messages) => {
-                setTotalMessagesCount(messages.length);
                 setMessages(messages);
                 setIsLoading(false);
             });
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -64,7 +58,6 @@ const Dashboard = () => {
                 <DashboardContent
                     isLoading={ isLoading }
                     messages={ messages }
-                    totalMessagesCount={ totalMessagesCount }
                 />
             </WithSpinner>
         </Container>

@@ -17,7 +17,7 @@ const Section = styled.section`
     ` }
 `;
 
-const MessageList = ({ isListView, messages }) => {
+const MessageList = ({ data = [], isListView }) => {
     const { toolManager } = useContext(ServiceProviderContext);
 
     const getMessageText = useCallback((message) => {
@@ -33,25 +33,23 @@ const MessageList = ({ isListView, messages }) => {
     return (
         <Section isListView={ isListView }>
             {
-                messages.length ? messages.map(
-                    (message) => (
-                        <Message
-                            key={ message.id }
-                            date={ toolManager.parseUnixDate(message.date) }
-                            text={ getMessageText(message) }
-                            imageUrl={ getMessageImageUrl(message) }
-                            isListItem={ isListView }
-                        />
-                    )
-                ) : <MessageListEmpty/>
+                data.length ? data.map((message) => (
+                    <Message
+                        key={ `msg_${ message.id }` }
+                        date={ toolManager.parseUnixDate(message.date) }
+                        text={ getMessageText(message) }
+                        imageUrl={ getMessageImageUrl(message) }
+                        isListItem={ isListView }
+                    />
+                )) : <MessageListEmpty/>
             }
         </Section>
     )
 };
 
 MessageList.propTypes = {
+    data: PropTypes.array,
     isListView: PropTypes.bool,
-    messages: PropTypes.array,
 };
 
 export default MessageList;

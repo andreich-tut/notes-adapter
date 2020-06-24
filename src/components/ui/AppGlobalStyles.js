@@ -77,4 +77,8 @@ export default createGlobalStyle`
     input::-moz-placeholder {
         font-family: ${ fontFamily };
     }
+    
+    button {
+        font-family: ${ fontFamily };
+    }
 `;

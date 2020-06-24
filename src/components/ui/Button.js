@@ -15,16 +15,11 @@ const StyledButton = styled.button`
     cursor: pointer;
 `;
 
-const Button = ({ text, handler }) => {
-    const buttonHandler = (e) => handler && handler(e);
-
-    return (
-        <StyledButton
-            type="submit"
-            onClick={ buttonHandler }
-        >{ text }</StyledButton>
-    );
-};
+const Button = ({ text, handler }) => (
+    <StyledButton type="submit" onClick={ (e) => handler && handler(e) }>
+        { text }
+    </StyledButton>
+);
 
 Button.propTypes = {
     text: PropTypes.string,

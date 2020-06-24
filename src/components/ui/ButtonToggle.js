@@ -13,7 +13,6 @@ const Span = styled.span`
 `;
 
 const ButtonToggle = ({ handler, firstStateTitle, secondStateTitle }) => {
-
     const [ isToggled, setIsToggle ] = useState(true);
 
     const toggleState = () => {

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import WithOuterClick from './WithOuterClick';
 
@@ -54,7 +54,6 @@ const List = styled.section`
 `;
 
 const Dropdown = ({ title, children }) => {
-
     const [ expanded, setExpanded ] = useState(false);
 
     return (

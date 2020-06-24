@@ -23,6 +23,7 @@ const DashboardHeader = ({ children, userName }) => (
 );
 
 DashboardHeader.propTypes = {
+    children: PropTypes.arrayOf(PropTypes.element),
     userName: PropTypes.string,
 };
 

@@ -10,13 +10,13 @@ const MessageContainer = styled.article`
         margin-right: 25px;
     }
     
-    ${ ({ isListItem }) => !isListItem && css`
+    ${ ({ isListItem = false }) => !isListItem && css`
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
         flex-direction: column;
         width: calc((100% - (20px * 3)) / 4);
-        flex: calc((100% - (20px * 3)) / 4);
+        flex: 0 0 calc((100% - (20px * 3)) / 4);
         margin-right: 20px;
         border: 1px solid #000000;
         word-break: break-all;
@@ -36,9 +36,5 @@ const MessageContainer = styled.article`
         }
     ` }
 `;
-
-MessageContainer.defaultProps = {
-    isListItem: false,
-};
 
 export default MessageContainer;

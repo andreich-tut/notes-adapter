@@ -23,15 +23,11 @@ const StyledButton = styled.button`
     }
 `;
 
-const ButtonBordered = ({ children, handler, text }) => {
-    const buttonHandler = (e) => handler && handler(e);
-
-    return (
-        <StyledButton onClick={ buttonHandler }>
-            { text ? text : children }
-        </StyledButton>
-    );
-}
+const ButtonBordered = ({ children, handler, text }) => (
+    <StyledButton onClick={ (e) => handler && handler(e) }>
+        { text ? text : children }
+    </StyledButton>
+);
 
 ButtonBordered.propTypes = {
     children: PropTypes.any,

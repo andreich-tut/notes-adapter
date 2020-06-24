@@ -20,9 +20,7 @@ const Form = styled.form`
 `;
 
 const SignIn = () => {
-
     const serviceProvider = useContext(ServiceProviderContext);
-
     const history = useHistory();
 
     const {

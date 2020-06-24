@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import DelimiterLine from '../ui/DelimiterLine';
 import Link from '../ui/Link';
@@ -11,10 +12,16 @@ const Container = styled.nav`
 
 const Login = ({ isAuthenticated }) => isAuthenticated
     ? <Redirect to="/" exact/>
-    : <Container>
-        <Link to="/sign-up" text="Sign up"/>
-        <DelimiterLine/>
-        <Link to="/sign-in" text="Sign in"/>
-    </Container>;
+    : (
+        <Container>
+            <Link to="/sign-up" text="Sign up"/>
+            <DelimiterLine/>
+            <Link to="/sign-in" text="Sign in"/>
+        </Container>
+    );
+
+Login.propTypes = {
+    isAuthenticated: PropTypes.bool,
+};
 
 export default Login;

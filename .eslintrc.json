@@ -30,7 +30,8 @@
     },
     "plugins": [
         "react",
-        "babel"
+        "babel",
+        "react-hooks"
     ],
     "settings": {
         "react": {

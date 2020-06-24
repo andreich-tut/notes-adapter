@@ -9,23 +9,21 @@ import React, {
 
 
 const WithOuterClick = ({ children, handler }) => {
-
     const ref = useRef(null);
 
-    const handleClickOutside = (e) => {
-        if (ref.current && !ref.current.contains(e.target)) {
-            handler();
-        }
-    };
-
     useEffect(() => {
+        const handleClickOutside = (e) => ref.current
+            && !ref.current.contains(e.target)
+            && handler();
+
         document.addEventListener('mousedown', handleClickOutside);
+
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [ ref ]);
+    }, [ ref, handler ]);
 
-    return Children.map(children, child => {
+    return Children.map(children, (child) => {
         if (isValidElement(child)) {
             return cloneElement(children, { ref });
         }

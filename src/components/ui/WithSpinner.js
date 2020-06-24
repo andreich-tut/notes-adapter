@@ -1,29 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 
 
 const spinnerFrames = [ '🕛', '🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚' ];
 
 const Spinner = () => {
-
     const delay = 80;
-
     const [ frameIndex, setFrameIndex ] = useState(0);
-
-    const requestRef = useRef({});
-
+    const requestRef = useRef(0);
     const previousTimeRef = useRef(0);
 
-    const animate = (time) => {
-        if (time - previousTimeRef.current > delay) {
-            previousTimeRef.current = time;
-            setFrameIndex(prevFrameIndex => spinnerFrames.length - 1 > prevFrameIndex ? prevFrameIndex + 1 : 0);
-        }
-
-        requestRef.current = requestAnimationFrame(animate);
-    };
-
     useEffect(() => {
+        const animate = (time) => {
+            if (time - previousTimeRef.current > delay) {
+                previousTimeRef.current = time;
+                setFrameIndex((prevFrameIndex) => {
+                    return spinnerFrames.length - 1 > prevFrameIndex
+                        ? prevFrameIndex + 1 : 0;
+                });
+            }
+
+            requestRef.current = requestAnimationFrame(animate);
+        };
+
         requestRef.current = requestAnimationFrame(animate);
+
         return () => cancelAnimationFrame(requestRef.current);
     }, []);
 
@@ -34,5 +35,9 @@ const Spinner = () => {
 };
 
 const WithSpinner = ({ children }) => children.props.isLoading ? <Spinner/> : children;
+
+WithSpinner.propTypes = {
+    children: PropTypes.element,
+};
 
 export default WithSpinner;

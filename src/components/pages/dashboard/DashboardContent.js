@@ -5,7 +5,7 @@ import Checkbox from '@/components/ui/Checkbox';
 import Dropdown from '@/components/ui/Dropdown';
 import MessageList from './MessageList';
 import MessageListController from './MessageListController';
-import withPagination from '@/components/ui/WithPagination';
+import withPagination from '@/components/ui/pagination/withPagination';
 
 
 const DashboardContent = ({ messages }) => {
@@ -53,8 +53,8 @@ const DashboardContent = ({ messages }) => {
             <MessageListWithPagination
                 data={ messages }
                 isListView={ isListView }
-                itemsCount={ 10 }
-                marginTop={ 20 }
+                itemsLimit={ 10 }
+                pagesMarginTop={ 20 }
             />
         </>
     );

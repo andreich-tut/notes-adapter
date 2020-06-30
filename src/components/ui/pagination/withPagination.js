@@ -7,15 +7,15 @@ import PageButton from '@/components/ui/pagination/PageButton';
 const withPagination = (WrappedComponent) => {
     const Pagination = ({ data = [], itemsLimit = 10, pagesMarginTop = 30, ...rest }) => {
         const FIRST_PAGE = 1;
-        const PAGE_TAIL_MAX_LENGTH = 4;
+        const PAGES_LIMIT = 10;
         const PAGES_DELIMITER = '...';
-        const PAGES_LIMIT = 6;
 
         const { toolManager } = useContext(ServiceProviderContext);
 
         const pagesRangeLimit = Math.ceil(data.length / itemsLimit);
         const pagesRange = toolManager.range(1, pagesRangeLimit);
         const pagesNeighboursCount = (PAGES_LIMIT - 4) / 2;
+        const pageTailLength = PAGES_LIMIT - 2;
 
         const [ currentPage, setCurrentPage ] = useState(1);
         const [ list, setList ] = useState(data.slice(0, itemsLimit));
@@ -32,14 +32,14 @@ const withPagination = (WrappedComponent) => {
             }
         };
 
-        const setPrevPage = () => currentPage - 1 > 0 && setPage(currentPage - 1);
+        const setPrevPage = () => currentPage > 1 && setPage(currentPage - 1);
 
-        const setNextPage = () => currentPage + 1 <= pagesRangeLimit && setPage(currentPage + 1);
+        const setNextPage = () => currentPage < pagesRangeLimit && setPage(currentPage + 1);
 
         const getPagesRange = (page) => {
             if (pagesRangeLimit > PAGES_LIMIT) {
-                const isIncludesStart = page <= PAGE_TAIL_MAX_LENGTH;
-                const isIncludesEnd = page > pagesRangeLimit - PAGE_TAIL_MAX_LENGTH;
+                const isIncludesStart = page <= pageTailLength;
+                const isIncludesEnd = page > pagesRangeLimit - pageTailLength;
 
                 if (isIncludesStart) {
                     return [
